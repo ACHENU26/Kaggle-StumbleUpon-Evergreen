@@ -1,0 +1,56 @@
+requirements:
+  cmd: python requirements.py
+  deps:
+  - path: requirements-dev.txt
+    md5: 764a0f6d8deb1b077f3c712bc0a6234a
+  - path: requirements.py
+    md5: 529034a39158fc559b24dc9118b16f6b
+  outs:
+  - path: requirements.txt
+    md5: 98d2464429575d96b0fcc797d083c58d
+split:
+  cmd: jupytext --from ipynb --execute model_builder/01-Split.ipynb
+  deps:
+  - path: data/train_full_raw.csv
+    md5: 2ce9b380b6e0ef5737548a1f43508a0e
+  - path: model_builder/01-Split.ipynb
+    md5: e07d0416a737a96881f76a567cf3eca6
+  - path: requirements-dev.txt
+    md5: 764a0f6d8deb1b077f3c712bc0a6234a
+  outs:
+  - path: data/train_raw.csv
+    md5: d53e97dbc4dd5f077ea151823c275753
+  - path: data/val_raw.csv
+    md5: bf3c5f2d629b1f865a60abcf72ddc25d
+featurize:
+  cmd: jupytext --from ipynb --execute model_builder/02-Featurize.ipynb
+  deps:
+  - path: data/test_inputs_raw.csv
+    md5: 89cca080880f448e7276f7da760827d8
+  - path: data/train_raw.csv
+    md5: d53e97dbc4dd5f077ea151823c275753
+  - path: data/val_raw.csv
+    md5: bf3c5f2d629b1f865a60abcf72ddc25d
+  - path: model_builder/02-Featurize.ipynb
+    md5: dfde2b5df015543728a78bbefa9e55ae
+  - path: requirements-dev.txt
+    md5: 764a0f6d8deb1b077f3c712bc0a6234a
+  outs:
+  - path: data/test_inputs.csv
+    md5: 59021c9a143477c795c2b3bfe66b8108
+  - path: data/train.csv
+    md5: a8bafac6489545cca8759d91ec93beb0
+  - path: data/val.csv
+    md5: 87fa7cbdf047e55ffa9df9813dbf3a8b
+train-model:
+  cmd: jupytext --from ipynb --execute model_builder/03-Train-model.ipynb
+  deps:
+  - path: data/train.csv
+    md5: a8bafac6489545cca8759d91ec93beb0
+  - path: model_builder/03-Train-model.ipynb
+    md5: 5a5a9de2ea94d8dc9d715f4c3c70deb1
+  - path: requirements-dev.txt
+    md5: 764a0f6d8deb1b077f3c712bc0a6234a
+  outs:
+  - path: data/model.pkl
+    md5: 97a22fc06de6c02ca05f9ee9bb4409a9

@@ -1,0 +1,37 @@
+stages:
+  requirements:
+    cmd: python requirements.py
+    deps:
+    - requirements-dev.txt
+    - requirements.py
+    outs:
+    - requirements.txt
+  split:
+    cmd: jupytext --from ipynb --execute model_builder/01-Split.ipynb
+    deps:
+    - data/train_full_raw.csv
+    - model_builder/01-Split.ipynb
+    - requirements-dev.txt
+    outs:
+    - data/train_raw.csv
+    - data/val_raw.csv
+  featurize:
+    cmd: jupytext --from ipynb --execute model_builder/02-Featurize.ipynb
+    deps:
+    - data/test_inputs_raw.csv
+    - data/train_raw.csv
+    - data/val_raw.csv
+    - model_builder/02-Featurize.ipynb
+    - requirements-dev.txt
+    outs:
+    - data/test_inputs.csv
+    - data/train.csv
+    - data/val.csv
+  train-model:
+    cmd: jupytext --from ipynb --execute model_builder/03-Train-model.ipynb
+    deps:
+    - data/train.csv
+    - model_builder/03-Train-model.ipynb
+    - requirements-dev.txt
+    outs:
+    - data/model.pkl

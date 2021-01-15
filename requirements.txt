@@ -1,0 +1,6 @@
+kaggle 
+git+https://github.com/louisdorard/mlxtend
+jupytext
+dabl
+python-dotenv
+dvc
