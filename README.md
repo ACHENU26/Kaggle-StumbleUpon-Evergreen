@@ -1,9 +1,9 @@
 # StumbleUpon Evergreen Classification Challenge
 ## Kaggle Competition 
 
-**Athors : ** Cédric FLAMANT & Axel CHENU 
-**Creation date : ** 07/01/2020
-**Update date : **
+- **Athors : ** Cédric FLAMANT & Axel CHENU 
+- **Creation date : ** 07/01/2020
+- **Update date : ** 14/01/2021
 
 
 ## Data Description 
